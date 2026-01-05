@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 ARTI Riyaziyyat 1-ci Sinif</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 48px; color: #5a67d8; margin-bottom: 10px; font-weight: 800; }
+        .stats { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-weight: 700;
+        }
+        .stat-number { font-size: 36px; display: block; }
+        .stat-label { font-size: 14px; opacity: 0.9; }
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .search-box { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Nunito', sans-serif;
+        }
+        .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid #5a67d8;
+            background: white;
+            color: #5a67d8;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Nunito', sans-serif;
+        }
+        .filter-btn:hover { background: #5a67d8; color: white; transform: translateY(-2px); }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .pdf-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .pdf-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .pdf-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        .pdf-card.fesil1::before { background: linear-gradient(135deg, #66BB6A 0%, #4CAF50 100%); }
+        .pdf-card.fesil2::before { background: linear-gradient(135deg, #42A5F5 0%, #2196F3 100%); }
+        .pdf-card.fesil3::before { background: linear-gradient(135deg, #FF7043 0%, #FF5722 100%); }
+        .pdf-icon { font-size: 40px; margin-bottom: 12px; }
+        .pdf-title { font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 8px; }
+        .pdf-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .badge-fesil1 { background: #E8F5E9; color: #2E7D32; }
+        .badge-fesil2 { background: #E3F2FD; color: #1565C0; }
+        .badge-fesil3 { background: #FBE9E7; color: #D84315; }
+        .pdf-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .no-results {
+            background: white;
+            border-radius: 15px;
+            padding: 60px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-top: 30px;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; }
+            .pdf-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 ARTI Riyaziyyat 1-ci Sinif</h1>
+            <p style="font-size: 18px; color: #718096;">Azerbaijan Republic Education Institute</p>
+            <div class="stats">
+                <div class="stat-box"><span class="stat-number">3</span><span class="stat-label">FƏSİL</span></div>
+                <div class="stat-box"><span class="stat-number">27</span><span class="stat-label">MÖVZU</span></div>
+                <div class="stat-box"><span class="stat-number">65+</span><span class="stat-label">DƏRS</span></div>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Mövzu axtar...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Hamısı</button>
+                    <button class="filter-btn" data-filter="fesil1">Fəsil 1</button>
+                    <button class="filter-btn" data-filter="fesil2">Fəsil 2</button>
+                    <button class="filter-btn" data-filter="fesil3">Fəsil 3</button>
+                </div>
+            </div>
+        </div>
+        <div id="pdfGrid" class="pdf-grid"></div>
+        <div id="noResults" class="no-results">
+            <div style="font-size: 60px;">🔍</div>
+            <div style="font-size: 20px; color: #718096;">Heç bir nəticə tapılmadı</div>
+        </div>
+        <div class="footer">
+            <p style="font-weight: 600; margin-bottom: 8px;">ARTI - Azerbaijan Republic Education Institute</p>
+            <p style="font-size: 13px; color: #718096;">Hazırladı: Tariyel Qurbanov | © 2025</p>
+        </div>
+    </div>
+    <script>
+        const pdfs = [
+            {id:'f1-1',title:'Mövzu 1',category:'fesil1',badge:'Fəsil 1',badgeClass:'badge-fesil1',icon:'📗',path:'pdfs/Fesil1/Fesil1-1.pdf'},
+            {id:'f1-2',title:'Mövzu 2',category:'fesil1',badge:'Fəsil 1',badgeClass:'badge-fesil1',icon:'📗',path:'pdfs/Fesil1/Fesil1-2.pdf'},
+            {id:'f1-3',title:'Mövzu 3',category:'fesil1',badge:'Fəsil 1',badgeClass:'badge-fesil1',icon:'📗',path:'pdfs/Fesil1/Fesil1-3.pdf'},
+            {id:'f1-4',title:'Mövzu 4',category:'fesil1',badge:'Fəsil 1',badgeClass:'badge-fesil1',icon:'📗',path:'pdfs/Fesil1/Fesil1-4.pdf'},
+            {id:'f1-5',title:'Mövzu 5',category:'fesil1',badge:'Fəsil 1',badgeClass:'badge-fesil1',icon:'📗',path:'pdfs/Fesil1/Fesil1-5.pdf'},
+            {id:'f1-6',title:'Mövzu 6',category:'fesil1',badge:'Fəsil 1',badgeClass:'badge-fesil1',icon:'📗',path:'pdfs/Fesil1/Fesil1-6.pdf'},
+            {id:'f2-1',title:'Mövzu 1',category:'fesil2',badge:'Fəsil 2',badgeClass:'badge-fesil2',icon:'📘',path:'pdfs/Fesil2/Fesil2-1.pdf'},
+            {id:'f2-2',title:'Mövzu 2',category:'fesil2',badge:'Fəsil 2',badgeClass:'badge-fesil2',icon:'📘',path:'pdfs/Fesil2/Fesil2-2.pdf'},
+            {id:'f2-3',title:'Mövzu 3',category:'fesil2',badge:'Fəsil 2',badgeClass:'badge-fesil2',icon:'📘',path:'pdfs/Fesil2/Fesil2-3.pdf'},
+            {id:'f2-4',title:'Mövzu 4',category:'fesil2',badge:'Fəsil 2',badgeClass:'badge-fesil2',icon:'📘',path:'pdfs/Fesil2/Fesil2-4.pdf'},
+            {id:'f2-5',title:'Mövzu 5',category:'fesil2',badge:'Fəsil 2',badgeClass:'badge-fesil2',icon:'📘',path:'pdfs/Fesil2/Fesil2-5.pdf'},
+            {id:'f2-6',title:'Mövzu 6',category:'fesil2',badge:'Fəsil 2',badgeClass:'badge-fesil2',icon:'📘',path:'pdfs/Fesil2/Fesil2-6.pdf'},
+            {id:'f3-1',title:'Mövzu 1',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-1.pdf'},
+            {id:'f3-2',title:'Mövzu 2',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-2.pdf'},
+            {id:'f3-3',title:'Mövzu 3',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-3.pdf'},
+            {id:'f3-4',title:'Mövzu 4',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-4.pdf'},
+            {id:'f3-5',title:'Mövzu 5',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-5.pdf'},
+            {id:'f3-6',title:'Mövzu 6',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-6.pdf'},
+            {id:'f3-7',title:'Mövzu 7',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-7.pdf'},
+            {id:'f3-8',title:'Mövzu 8',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-8.pdf'},
+            {id:'f3-9',title:'Mövzu 9',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-9.pdf'},
+            {id:'f3-10',title:'Mövzu 10',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-10.pdf'},
+            {id:'f3-11',title:'Mövzu 11',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-11.pdf'},
+            {id:'f3-12',title:'Mövzu 12',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-12.pdf'},
+            {id:'f3-13',title:'Mövzu 13',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-13.pdf'},
+            {id:'f3-14',title:'Mövzu 14',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-14.pdf'},
+            {id:'f3-15',title:'Mövzu 15',category:'fesil3',badge:'Fəsil 3',badgeClass:'badge-fesil3',icon:'📙',path:'pdfs/Fesil3/Fesil3-15.pdf'},
+        ];
+        function renderPDFs(filtered){const grid=document.getElementById('pdfGrid'),noResults=document.getElementById('noResults');grid.innerHTML='';if(filtered.length===0){grid.style.display='none';noResults.style.display='block';return;}grid.style.display='grid';noResults.style.display='none';filtered.forEach(pdf=>{const card=document.createElement('div');card.className=`pdf-card ${pdf.category}`;card.innerHTML=`<div class="pdf-badge ${pdf.badgeClass}">${pdf.badge}</div><div class="pdf-icon">${pdf.icon}</div><div class="pdf-title">${pdf.title}</div><a href="${pdf.path}" class="pdf-link" target="_blank">Aç 📄</a>`;grid.appendChild(card);});}
+        function filterPDFs(category,search=''){let filtered=pdfs;if(category!=='all')filtered=filtered.filter(p=>p.category===category);if(search){const term=search.toLowerCase();filtered=filtered.filter(p=>p.title.toLowerCase().includes(term)||p.badge.toLowerCase().includes(term));}renderPDFs(filtered);}
+        document.addEventListener('DOMContentLoaded',()=>{renderPDFs(pdfs);document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const search=document.getElementById('searchInput').value;filterPDFs(btn.dataset.filter,search);});});document.getElementById('searchInput').addEventListener('input',(e)=>{const active=document.querySelector('.filter-btn.active');filterPDFs(active.dataset.filter,e.target.value);});});
+    </script>
+</body>
+</html>
